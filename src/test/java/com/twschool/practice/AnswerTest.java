@@ -21,4 +21,14 @@ public class AnswerTest {
 
         Assert.assertEquals("2A0B", result);
     }
+
+    @Test
+    public void should_return_0A4B_when_compare_with_4321_given_answer_1234() {
+        GameAnswer answer = new GameAnswer("1 2 3 4");
+
+        String result = answer.check("4 3 2 1");
+
+        Assert.assertEquals("0A4B", result);
+    }
+
 }

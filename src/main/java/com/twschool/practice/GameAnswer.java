@@ -1,6 +1,7 @@
 package com.twschool.practice;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GameAnswer {
@@ -13,11 +14,14 @@ public class GameAnswer {
     public String check(String userAnswerString) {
         List<String> userAnswerNumbers = Arrays.asList(userAnswerString.split(" "));
         int valueAndPositionCorrectCount = 0;
+        int valueIncorrectAndPositionCorrectCount = 0;
         for (int index = 0; index < answerNumbers.size(); index++) {
             if (answerNumbers.get(index).equals(userAnswerNumbers.get(index))) {
                 valueAndPositionCorrectCount ++;
+            } else if (answerNumbers.contains(userAnswerNumbers.get(index))) {
+                valueIncorrectAndPositionCorrectCount ++;
             }
         }
-        return valueAndPositionCorrectCount + "A0B";
+        return valueAndPositionCorrectCount + "A" + valueIncorrectAndPositionCorrectCount + "B";
     }
 }
