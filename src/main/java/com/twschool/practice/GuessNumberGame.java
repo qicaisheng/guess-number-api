@@ -12,7 +12,12 @@ public class GuessNumberGame {
 
     public String guess(String userAnswerString) {
         String result = gameAnswer.check(userAnswerString);
-        leftTryTimes --;
+        decreaseTryTimes();
+        modifyStatus(result);
+        return result;
+    }
+
+    private void modifyStatus(String result) {
         if ("4A0B".equals(result)) {
             gameStatus = GameStatus.SUCCEED;
         } else if (leftTryTimes == 0) {
@@ -20,7 +25,10 @@ public class GuessNumberGame {
         } else {
             gameStatus = GameStatus.CONTINUED;
         }
-        return result;
+    }
+
+    private void decreaseTryTimes() {
+        leftTryTimes --;
     }
 
     public GameStatus getStatus() {
