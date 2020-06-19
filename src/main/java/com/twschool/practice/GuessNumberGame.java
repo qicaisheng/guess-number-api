@@ -10,4 +10,8 @@ public class GuessNumberGame {
     public String guess(String userAnswerString) {
         return gameAnswer.check(userAnswerString);
     }
+
+    public GameStatus getStatus() {
+        return GameStatus.SUCCEED;
+    }
 }
