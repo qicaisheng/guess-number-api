@@ -34,4 +34,16 @@ public class GuessNumberGameTest {
 
         Assert.assertEquals(GameStatus.SUCCEED, gameStatus);
     }
+
+    @Test
+    public void should_return_continued_when_get_status_after_input_1256_given_game_with_answer_1234() {
+        GameAnswer gameAnswer = new GameAnswer("1 2 3 4");
+        GuessNumberGame guessNumberGame = new GuessNumberGame(gameAnswer);
+        guessNumberGame.guess("1 2 5 6");
+
+        GameStatus gameStatus = guessNumberGame.getStatus();
+
+        Assert.assertEquals(GameStatus.CONTINUED, gameStatus);
+    }
+
 }
