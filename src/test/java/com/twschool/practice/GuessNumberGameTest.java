@@ -3,6 +3,7 @@ package com.twschool.practice;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class GuessNumberGameTest {
 
@@ -11,7 +12,10 @@ public class GuessNumberGameTest {
     @Before
     public void setUp() throws Exception {
         GameAnswer gameAnswer = new GameAnswer("1 2 3 4");
-        guessNumberGame = new GuessNumberGame(gameAnswer);
+
+        AnswerGenerator answerGenerator = Mockito.mock(AnswerGenerator.class);
+        Mockito.when(answerGenerator.generateAnswer()).thenReturn(gameAnswer);
+        guessNumberGame = new GuessNumberGame(answerGenerator);
     }
 
     @Test

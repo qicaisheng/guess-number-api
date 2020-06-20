@@ -6,8 +6,8 @@ public class GuessNumberGame {
     private GameStatus gameStatus = GameStatus.CONTINUED;
     private int leftTryTimes = MAX_TRY_TIMES;
 
-    public GuessNumberGame(GameAnswer gameAnswer) {
-        this.gameAnswer = gameAnswer;
+    public GuessNumberGame(AnswerGenerator answerGenerator) {
+        this.gameAnswer = answerGenerator.generateAnswer();
     }
 
     public String guess(String userAnswerString) {
