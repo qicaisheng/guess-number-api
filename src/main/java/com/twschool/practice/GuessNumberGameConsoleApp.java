@@ -1,5 +1,9 @@
 package com.twschool.practice;
 
+import com.twschool.practice.domain.AnswerGenerator;
+import com.twschool.practice.domain.GameStatus;
+import com.twschool.practice.domain.GuessNumberGame;
+
 import java.util.Scanner;
 
 public class GuessNumberGameConsoleApp {

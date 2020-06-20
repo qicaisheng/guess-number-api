@@ -1,5 +1,6 @@
-package com.twschool.practice;
+package com.twschool.practice.domain;
 
+import com.twschool.practice.domain.GameAnswer;
 import org.junit.Assert;
 import org.junit.Test;
 

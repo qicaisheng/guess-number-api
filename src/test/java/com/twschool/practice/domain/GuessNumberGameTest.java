@@ -1,4 +1,4 @@
-package com.twschool.practice;
+package com.twschool.practice.domain;
 
 import org.junit.Assert;
 import org.junit.Before;

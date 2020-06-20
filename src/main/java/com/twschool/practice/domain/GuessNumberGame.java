@@ -1,4 +1,4 @@
-package com.twschool.practice;
+package com.twschool.practice.domain;
 
 public class GuessNumberGame {
     public static final int MAX_TRY_TIMES = 6;
