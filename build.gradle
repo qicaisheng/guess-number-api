@@ -12,6 +12,8 @@ buildscript {
 plugins {
     id 'java'
     id 'jacoco'
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 }
 
 allprojects {
@@ -20,6 +22,7 @@ allprojects {
         maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
         maven{ url 'https://maven.aliyun.com/repository/public'}
         maven{ url 'https://maven.aliyun.com/repository/jcenter'}
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/jcenter'}
         mavenCentral()
         jcenter()
     }
@@ -28,6 +31,11 @@ allprojects {
 sourceCompatibility = 1.8
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
 
