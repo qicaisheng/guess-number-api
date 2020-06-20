@@ -2,6 +2,8 @@ package com.twschool.practice;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GameAnswer {
     private final List<String> answerNumbers;
@@ -25,7 +27,8 @@ public class GameAnswer {
     }
 
     public boolean isValidFormat() {
-        if (answerNumbers.size() != 4) {
+        Set<String> answerNumberSet = answerNumbers.stream().collect(Collectors.toSet());
+        if (answerNumberSet.size() != 4) {
             return false;
         }
         return true;

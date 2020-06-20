@@ -49,4 +49,13 @@ public class GameAnswerTest {
         Assert.assertFalse(isValidFormat);
     }
 
+    @Test
+    public void should_return_false_when_check_is_valid_format_given_answer_1123() {
+        GameAnswer answer = new GameAnswer("1 1 2 3");
+
+        boolean isValidFormat = answer.isValidFormat();
+
+        Assert.assertFalse(isValidFormat);
+    }
+
 }
