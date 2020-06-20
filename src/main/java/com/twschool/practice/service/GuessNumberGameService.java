@@ -1,13 +1,14 @@
 package com.twschool.practice.service;
 
 import com.twschool.practice.GuessNumberGameRepository;
-import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GuessNumberGameService {
     
     private GuessNumberGameRepository guessNumberGameRepository;
 
-    public GuessNumberGameService(MemoryGuessNumberGameRepository guessNumberGameRepository) {
+    public GuessNumberGameService(GuessNumberGameRepository guessNumberGameRepository) {
         this.guessNumberGameRepository = guessNumberGameRepository;
     }
 

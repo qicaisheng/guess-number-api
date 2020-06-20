@@ -1,10 +1,14 @@
 package com.twschool.practice.api;
 
+import com.twschool.practice.service.GuessNumberGameService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,6 +22,14 @@ public class GuessNumberGameControllerTest {
     
     @Autowired
     private MockMvc mockMvc;
+    
+    @MockBean
+    private GuessNumberGameService guessNumberGameService;
+
+    @Before
+    public void setUp() throws Exception {
+        Mockito.when(guessNumberGameService.guess(Mockito.any())).thenReturn("4A0B");
+    }
 
     @Test
     public void should_return_guess_result() throws Exception {
