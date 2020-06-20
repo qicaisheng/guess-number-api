@@ -31,4 +31,13 @@ public class AnswerTest {
         Assert.assertEquals("0A4B", result);
     }
 
+    @Test
+    public void should_return_true_when_check_is_valid_format_given_answer_1234() {
+        GameAnswer answer = new GameAnswer("1 2 3 4");
+
+        boolean isValidFormat = answer.isValidFormat();
+
+        Assert.assertTrue(isValidFormat);
+    }
+
 }

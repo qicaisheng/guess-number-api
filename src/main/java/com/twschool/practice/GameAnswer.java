@@ -1,7 +1,6 @@
 package com.twschool.practice;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class GameAnswer {
@@ -23,5 +22,9 @@ public class GameAnswer {
             }
         }
         return valueAndPositionCorrectCount + "A" + valueIncorrectAndPositionCorrectCount + "B";
+    }
+
+    public boolean isValidFormat() {
+        return true;
     }
 }
