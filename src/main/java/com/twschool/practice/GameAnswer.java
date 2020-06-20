@@ -30,7 +30,7 @@ public class GameAnswer {
         Set<String> answerNumberSet = answerNumbers.stream()
                 .filter(answerNumber -> answerNumber.matches("\\d"))
                 .collect(Collectors.toSet());
-        if (answerNumberSet.size() != 4) {
+        if (answerNumbers.size() != 4 || answerNumberSet.size() != 4) {
             return false;
         }
         return true;
