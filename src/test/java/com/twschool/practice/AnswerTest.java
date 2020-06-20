@@ -40,4 +40,13 @@ public class AnswerTest {
         Assert.assertTrue(isValidFormat);
     }
 
+    @Test
+    public void should_return_false_when_check_is_valid_format_given_answer_12345() {
+        GameAnswer answer = new GameAnswer("1 2 3 4 5");
+
+        boolean isValidFormat = answer.isValidFormat();
+
+        Assert.assertFalse(isValidFormat);
+    }
+
 }

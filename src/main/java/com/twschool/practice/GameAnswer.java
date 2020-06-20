@@ -25,6 +25,9 @@ public class GameAnswer {
     }
 
     public boolean isValidFormat() {
+        if (answerNumbers.size() != 4) {
+            return false;
+        }
         return true;
     }
 }
