@@ -2,7 +2,7 @@ package com.twschool.practice;
 
 public class GuessNumberGame {
     public static final int MAX_TRY_TIMES = 6;
-    private GameAnswer gameAnswer;
+    private final GameAnswer gameAnswer;
     private GameStatus gameStatus = GameStatus.CONTINUED;
     private int leftTryTimes = MAX_TRY_TIMES;
 
