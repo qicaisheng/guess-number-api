@@ -27,7 +27,9 @@ public class GameAnswer {
     }
 
     public boolean isValidFormat() {
-        Set<String> answerNumberSet = answerNumbers.stream().collect(Collectors.toSet());
+        Set<String> answerNumberSet = answerNumbers.stream()
+                .filter(answerNumber -> answerNumber.matches("\\d"))
+                .collect(Collectors.toSet());
         if (answerNumberSet.size() != 4) {
             return false;
         }

@@ -58,4 +58,13 @@ public class GameAnswerTest {
         Assert.assertFalse(isValidFormat);
     }
 
+    @Test
+    public void should_return_false_when_check_is_valid_format_given_answer_abcd() {
+        GameAnswer answer = new GameAnswer("a b c d");
+
+        boolean isValidFormat = answer.isValidFormat();
+
+        Assert.assertFalse(isValidFormat);
+    }
+
 }
