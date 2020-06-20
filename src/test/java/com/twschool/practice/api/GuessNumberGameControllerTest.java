@@ -40,4 +40,13 @@ public class GuessNumberGameControllerTest {
             .andExpect(MockMvcResultMatchers.jsonPath("$.input").value("1 2 3 4"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("4A0B"));
     }
+
+    @Test
+    public void should_start_game() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/game")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        
+        Mockito.verify(guessNumberGameService, Mockito.times(1)).start();
+    }
 }
