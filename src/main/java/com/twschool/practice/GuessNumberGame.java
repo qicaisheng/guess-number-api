@@ -2,6 +2,7 @@ package com.twschool.practice;
 
 public class GuessNumberGame {
     public static final int MAX_TRY_TIMES = 6;
+    public static final String CORRECT_RESULT = "4A0B";
     private final GameAnswer gameAnswer;
     private GameStatus gameStatus = GameStatus.CONTINUED;
     private int leftTryTimes = MAX_TRY_TIMES;
@@ -18,7 +19,7 @@ public class GuessNumberGame {
     }
 
     private void modifyStatus(String result) {
-        if ("4A0B".equals(result)) {
+        if (CORRECT_RESULT.equals(result)) {
             gameStatus = GameStatus.SUCCEED;
         } else if (leftTryTimes == 0) {
             gameStatus = GameStatus.FAILED;
