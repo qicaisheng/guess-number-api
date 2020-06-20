@@ -1,16 +1,17 @@
 package com.twschool.practice.service;
 
+import com.twschool.practice.GuessNumberGameRepository;
 import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
 
 public class GuessNumberGameService {
     
-    private MemoryGuessNumberGameRepository memoryGuessNumberGameRepository;
+    private GuessNumberGameRepository guessNumberGameRepository;
 
-    public GuessNumberGameService(MemoryGuessNumberGameRepository memoryGuessNumberGameRepository) {
-        this.memoryGuessNumberGameRepository = memoryGuessNumberGameRepository;
+    public GuessNumberGameService(MemoryGuessNumberGameRepository guessNumberGameRepository) {
+        this.guessNumberGameRepository = guessNumberGameRepository;
     }
 
     public String guess(String userAnswer) {
-        return memoryGuessNumberGameRepository.find().guess(userAnswer);
+        return guessNumberGameRepository.find().guess(userAnswer);
     }
 }
