@@ -15,4 +15,8 @@ public class GuessNumberGameService {
     public String guess(String userAnswer) {
         return guessNumberGameRepository.find().guess(userAnswer);
     }
+
+    public void start() {
+        guessNumberGameRepository.create();
+    }
 }

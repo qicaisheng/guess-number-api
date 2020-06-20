@@ -20,4 +20,16 @@ public class GuessNumberGameServiceTest {
         Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).find();
         Mockito.verify(guessNumberGame, Mockito.times(1)).guess(Mockito.eq("1 2 3 4"));
     }
+
+
+    @Test
+    public void should_create_game() {
+        MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository);
+
+        guessNumberGameService.start();
+
+        Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).create();
+    }
+
 }
