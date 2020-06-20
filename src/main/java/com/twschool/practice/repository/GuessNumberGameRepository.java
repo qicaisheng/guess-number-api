@@ -1,4 +1,4 @@
-package com.twschool.practice;
+package com.twschool.practice.repository;
 
 import com.twschool.practice.domain.GuessNumberGame;
 
