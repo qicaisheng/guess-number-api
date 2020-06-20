@@ -12,11 +12,11 @@ public class GuessNumberGameService {
         this.guessNumberGameRepository = guessNumberGameRepository;
     }
 
-    public String guess(String userAnswer) {
-        return guessNumberGameRepository.find().guess(userAnswer);
+    public String guess(String userAnswer, String userId) {
+        return guessNumberGameRepository.find(userId).guess(userAnswer);
     }
 
-    public void start() {
-        guessNumberGameRepository.create();
+    public void start(String userId) {
+        guessNumberGameRepository.create(userId);
     }
 }

@@ -11,13 +11,13 @@ public class GuessNumberGameServiceTest {
     public void should_return_result_when_guess_number() {
         MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
         GuessNumberGame guessNumberGame = Mockito.mock(GuessNumberGame.class);
-        Mockito.when(memoryGuessNumberGameRepository.find()).thenReturn(guessNumberGame);
+        Mockito.when(memoryGuessNumberGameRepository.find(Mockito.any())).thenReturn(guessNumberGame);
         
         GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository);
 
-        guessNumberGameService.guess("1 2 3 4");
+        guessNumberGameService.guess("1 2 3 4", "1");
 
-        Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).find();
+        Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).find(Mockito.eq("1"));
         Mockito.verify(guessNumberGame, Mockito.times(1)).guess(Mockito.eq("1 2 3 4"));
     }
 
@@ -27,9 +27,9 @@ public class GuessNumberGameServiceTest {
         MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
         GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository);
 
-        guessNumberGameService.start();
+        guessNumberGameService.start("1");
 
-        Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).create();
+        Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).create(Mockito.eq("1"));
     }
 
 }

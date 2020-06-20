@@ -4,7 +4,7 @@ import com.twschool.practice.domain.GuessNumberGame;
 
 public interface GuessNumberGameRepository {
 
-    GuessNumberGame create();
+    GuessNumberGame create(String userId);
 
-    GuessNumberGame find();
+    GuessNumberGame find(String userId);
 }

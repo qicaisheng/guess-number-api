@@ -10,13 +10,13 @@ public class MemoryGuessNumberGameRepository implements GuessNumberGameRepositor
     private GuessNumberGame guessNumberGame;
     
     @Override
-    public GuessNumberGame create() {
+    public GuessNumberGame create(String userId) {
         guessNumberGame = new GuessNumberGame(new AnswerGenerator());
         return guessNumberGame;
     }
     
     @Override
-    public GuessNumberGame find() {
+    public GuessNumberGame find(String userId) {
         return guessNumberGame;
     }
 }

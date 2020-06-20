@@ -28,13 +28,14 @@ public class GuessNumberGameControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(guessNumberGameService.guess(Mockito.any())).thenReturn("4A0B");
+        Mockito.when(guessNumberGameService.guess(Mockito.any(), Mockito.eq("1"))).thenReturn("4A0B");
     }
 
     @Test
     public void should_return_guess_result() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/game/guess")
             .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"userId\": \"1\"}")
             .param("number", "1 2 3 4"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.input").value("1 2 3 4"))
@@ -44,9 +45,10 @@ public class GuessNumberGameControllerTest {
     @Test
     public void should_start_game() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/game")
+                .content("{\"userId\": \"1\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
         
-        Mockito.verify(guessNumberGameService, Mockito.times(1)).start();
+        Mockito.verify(guessNumberGameService, Mockito.times(1)).start(Mockito.eq("1"));
     }
 }

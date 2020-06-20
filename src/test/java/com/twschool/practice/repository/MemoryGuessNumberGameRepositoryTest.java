@@ -10,7 +10,7 @@ public class MemoryGuessNumberGameRepositoryTest {
     public void should_create_guess_number_game() {
         MemoryGuessNumberGameRepository guessNumberGameRepository = new MemoryGuessNumberGameRepository();
         
-        GuessNumberGame guessNumberGame = guessNumberGameRepository.create();
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.create("1");
 
         Assert.assertNotNull(guessNumberGame);
     }
@@ -18,9 +18,9 @@ public class MemoryGuessNumberGameRepositoryTest {
     @Test
     public void should_get_guess_number_game() {
         MemoryGuessNumberGameRepository guessNumberGameRepository = new MemoryGuessNumberGameRepository();
-        guessNumberGameRepository.create();
+        guessNumberGameRepository.create("1");
         
-        GuessNumberGame guessNumberGame = guessNumberGameRepository.find();
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.find("1");
 
         Assert.assertNotNull(guessNumberGame);
     }
