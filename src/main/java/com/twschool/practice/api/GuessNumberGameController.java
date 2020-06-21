@@ -1,7 +1,6 @@
 package com.twschool.practice.api;
 
 import com.twschool.practice.service.GuessNumberGameService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,9 +12,12 @@ import java.util.Map;
 @RestController
 public class GuessNumberGameController {
     
-    @Autowired
-    private GuessNumberGameService guessNumberGameService;
-    
+    private final GuessNumberGameService guessNumberGameService;
+
+    public GuessNumberGameController(GuessNumberGameService guessNumberGameService) {
+        this.guessNumberGameService = guessNumberGameService;
+    }
+
     @PostMapping("/games/guess-numbers")
     public GuessResponseBody guess(@RequestBody UserRequestBody userRequestBody) {
         
