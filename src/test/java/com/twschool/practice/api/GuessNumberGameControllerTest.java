@@ -1,6 +1,6 @@
 package com.twschool.practice.api;
 
-import com.twschool.practice.service.GameNotExistedException;
+import com.twschool.practice.domain.GameNotExistedException;
 import com.twschool.practice.service.GuessNumberGameService;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,9 +1,6 @@
 package com.twschool.practice.service;
 
-import com.twschool.practice.domain.GamePoints;
-import com.twschool.practice.domain.GameRecord;
-import com.twschool.practice.domain.GameStatus;
-import com.twschool.practice.domain.GuessNumberGame;
+import com.twschool.practice.domain.*;
 import com.twschool.practice.repository.GuessNumberGameRepository;
 import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
 import com.twschool.practice.repository.MemoryGuessNumberGameRepository;

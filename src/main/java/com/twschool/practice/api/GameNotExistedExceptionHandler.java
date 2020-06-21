@@ -1,6 +1,6 @@
 package com.twschool.practice.api;
 
-import com.twschool.practice.service.GameNotExistedException;
+import com.twschool.practice.domain.GameNotExistedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,4 +1,4 @@
-package com.twschool.practice.service;
+package com.twschool.practice.domain;
 
 public class GameNotExistedException extends RuntimeException {
 }

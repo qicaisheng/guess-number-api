@@ -1,5 +1,6 @@
 package com.twschool.practice.service;
 
+import com.twschool.practice.domain.GameNotExistedException;
 import com.twschool.practice.domain.GameRecord;
 import com.twschool.practice.domain.GameStatus;
 import com.twschool.practice.domain.GuessNumberGame;
