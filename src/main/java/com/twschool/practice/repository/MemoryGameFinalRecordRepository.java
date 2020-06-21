@@ -2,17 +2,20 @@ package com.twschool.practice.repository;
 
 import com.twschool.practice.domain.GameRecord;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemoryGameFinalRecordRepository {
-    private Map<String, GameRecord> gameRecordMap = new HashMap<>();
+    private List<GameRecord> gameRecords = new ArrayList<>();
 
     public void create(GameRecord gameRecord) {
-        gameRecordMap.put(gameRecord.getUserId(), gameRecord);
+        gameRecords.add(gameRecord);
     }
 
-    public GameRecord findBy(String userId) {
-        return gameRecordMap.get(userId);
+    public List<GameRecord> findBy(String userId) {
+        return gameRecords.stream()
+                .filter(gameRecord -> gameRecord.getUserId().equals(userId))
+                .collect(Collectors.toList());
     }
 }
