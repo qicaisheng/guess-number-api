@@ -1,6 +1,6 @@
 package com.twschool.practice.api;
 
-public class UserId {
+public class UserRequestBody {
     private String userId;
 
     public String getUserId() {

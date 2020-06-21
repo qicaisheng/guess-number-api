@@ -14,9 +14,9 @@ public class GuessNumberGameController {
     private GuessNumberGameService guessNumberGameService;
     
     @GetMapping("/game/guess")
-    public Map<String, String> guess(@RequestParam String number, @RequestBody UserId userId) {
+    public Map<String, String> guess(@RequestParam String number, @RequestBody UserRequestBody userRequestBody) {
         
-        String result = guessNumberGameService.guess(number, userId.getUserId());
+        String result = guessNumberGameService.guess(number, userRequestBody.getUserId());
         Map<String, String> response = new HashMap<>();
         response.put("input", number);
         response.put("result", result);
@@ -25,8 +25,8 @@ public class GuessNumberGameController {
     }
 
     @PostMapping("/game")
-    public void start(@RequestBody UserId userId) {
-        guessNumberGameService.start(userId.getUserId());
+    public void start(@RequestBody UserRequestBody userRequestBody) {
+        guessNumberGameService.start(userRequestBody.getUserId());
     }
 
 }
