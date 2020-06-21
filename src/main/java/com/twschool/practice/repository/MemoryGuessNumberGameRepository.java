@@ -10,7 +10,7 @@ import java.util.Map;
 @Repository
 public class MemoryGuessNumberGameRepository implements GuessNumberGameRepository {
     
-    private Map<String, GuessNumberGame> guessNumberGameMap = new HashMap<>();
+    private final Map<String, GuessNumberGame> guessNumberGameMap = new HashMap<>();
     
     @Override
     public GuessNumberGame createBy(String userId) {

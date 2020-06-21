@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MemoryGameFinalRecordRepository implements GameFinalRecordRepository {
-    private List<GameRecord> gameRecords = new ArrayList<>();
+    private final List<GameRecord> gameRecords = new ArrayList<>();
 
     @Override
     public void create(GameRecord gameRecord) {
