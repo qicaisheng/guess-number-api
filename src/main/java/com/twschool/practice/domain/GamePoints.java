@@ -11,6 +11,9 @@ public class GamePoints {
     }
 
     public int totalPoints() {
+        if (gameRecords == null || gameRecords.size() == 0) {
+            return 0;
+        }
         int continuousFiveTimesSucceedCount = getSumOf(5);
         int continuousThreeTimesSucceedCount = getSumOf(3);
         return continuousThreeTimesSucceedCount * 3 + continuousFiveTimesSucceedCount * 2;

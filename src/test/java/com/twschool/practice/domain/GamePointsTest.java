@@ -3,10 +3,20 @@ package com.twschool.practice.domain;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class GamePointsTest {
+
+    @Test
+    public void should_calculate_game_points_0_given_user_game_final_records_null() {
+        List<GameRecord> gameRecords = new ArrayList<>();
+        GamePoints gamePoints = new GamePoints(gameRecords);
+
+        Assert.assertEquals(0, gamePoints.totalPoints());
+    }
+
 
     @Test
     public void should_calculate_game_points_3_given_user_game_final_records_3_continuous_succeed() {
