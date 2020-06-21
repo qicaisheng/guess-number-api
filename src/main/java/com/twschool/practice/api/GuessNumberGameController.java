@@ -13,12 +13,12 @@ public class GuessNumberGameController {
     @Autowired
     private GuessNumberGameService guessNumberGameService;
     
-    @GetMapping("/games/guess")
-    public Map<String, String> guess(@RequestParam String number, @RequestBody UserRequestBody userRequestBody) {
+    @PostMapping("/games/guess-numbers")
+    public Map<String, String> guess(@RequestBody UserRequestBody userRequestBody) {
         
-        String result = guessNumberGameService.guess(number, userRequestBody.getUserId());
+        String result = guessNumberGameService.guess(userRequestBody.getNumber(), userRequestBody.getUserId());
         Map<String, String> response = new HashMap<>();
-        response.put("input", number);
+        response.put("input", userRequestBody.getNumber());
         response.put("result", result);
         
         return response;
