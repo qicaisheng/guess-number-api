@@ -1,9 +1,8 @@
 package com.twschool.practice.service;
 
 import com.twschool.practice.domain.*;
+import com.twschool.practice.repository.GameFinalRecordRepository;
 import com.twschool.practice.repository.GuessNumberGameRepository;
-import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
-import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,12 +11,12 @@ import java.util.List;
 public class GuessNumberGameService {
     
     private GuessNumberGameRepository guessNumberGameRepository;
-    private MemoryGameFinalRecordRepository gameFinalRecordRepository;
+    private GameFinalRecordRepository gameFinalRecordRepository;
 
-    public GuessNumberGameService(MemoryGuessNumberGameRepository memoryGuessNumberGameRepository, MemoryGameFinalRecordRepository memoryGameFinalRecordRepository) {
+    public GuessNumberGameService(GuessNumberGameRepository guessNumberGameRepository, GameFinalRecordRepository gameFinalRecordRepository) {
 
-        guessNumberGameRepository = memoryGuessNumberGameRepository;
-        this.gameFinalRecordRepository = memoryGameFinalRecordRepository;
+        this.guessNumberGameRepository = guessNumberGameRepository;
+        this.gameFinalRecordRepository = gameFinalRecordRepository;
     }
 
     public String guess(String userAnswer, String userId) {
