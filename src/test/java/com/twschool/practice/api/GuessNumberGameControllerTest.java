@@ -1,5 +1,6 @@
 package com.twschool.practice.api;
 
+import com.twschool.practice.service.GameNotExistedException;
 import com.twschool.practice.service.GuessNumberGameService;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,5 +51,16 @@ public class GuessNumberGameControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
         
         Mockito.verify(guessNumberGameService, Mockito.times(1)).start(Mockito.eq("1"));
+    }
+
+    @Test
+    public void should_return_http_status_code_400_when_guess_but_not_start_game() throws Exception {
+        Mockito.doThrow(GameNotExistedException.class).when(guessNumberGameService).guess(Mockito.any(), Mockito.any());
+        mockMvc.perform(MockMvcRequestBuilders.get("/game/guess")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\": \"1\"}")
+                .param("number", "1 2 3 4"))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError())
+                .andExpect(MockMvcResultMatchers.content().string("Please start new game"));
     }
 }
