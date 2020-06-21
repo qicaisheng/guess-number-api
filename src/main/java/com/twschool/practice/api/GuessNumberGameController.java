@@ -2,10 +2,9 @@ package com.twschool.practice.api;
 
 import com.twschool.practice.service.GuessNumberGameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GuessNumberGameController {
@@ -14,14 +13,13 @@ public class GuessNumberGameController {
     private GuessNumberGameService guessNumberGameService;
     
     @PostMapping("/games/guess-numbers")
-    public Map<String, String> guess(@RequestBody UserRequestBody userRequestBody) {
+    public GuessResponseBody guess(@RequestBody UserRequestBody userRequestBody) {
         
         String result = guessNumberGameService.guess(userRequestBody.getNumber(), userRequestBody.getUserId());
-        Map<String, String> response = new HashMap<>();
-        response.put("input", userRequestBody.getNumber());
-        response.put("result", result);
-        
-        return response;
+        GuessResponseBody guessResponseBody = new GuessResponseBody();
+        guessResponseBody.setInput(userRequestBody.getNumber());
+        guessResponseBody.setResult(result);
+        return guessResponseBody;
     }
 
     @PostMapping("/games")
