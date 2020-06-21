@@ -11,14 +11,8 @@ public class GamePoints {
     }
 
     public int totalPoints() {
-        int continuousMultipleFiveTimesSucceedCount = getContinuousSucceedCountList().stream()
-                .map(count -> count / 5)
-                .mapToInt(Integer::intValue)
-                .sum();
-        int continuousMultipleThreeTimesSucceedCount = getContinuousSucceedCountList().stream()
-                .map(count -> count / 3)
-                .mapToInt(Integer::intValue)
-                .sum();
+        int continuousMultipleFiveTimesSucceedCount = getSumOf(5);
+        int continuousMultipleThreeTimesSucceedCount = getSumOf(3);
         return continuousMultipleThreeTimesSucceedCount * 3 + continuousMultipleFiveTimesSucceedCount * 2;
     }
 
@@ -37,6 +31,13 @@ public class GamePoints {
             }
         }
         return continuousSucceedCountList;
+    }
+
+    private int getSumOf(int continuousSucceedTimes) {
+        return getContinuousSucceedCountList().stream()
+                .map(count -> count / continuousSucceedTimes)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
 }
