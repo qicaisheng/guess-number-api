@@ -61,4 +61,15 @@ public class GuessNumberGameControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError())
                 .andExpect(MockMvcResultMatchers.content().string("Please start new game"));
     }
+
+    @Test
+    public void should_return_game_points() throws Exception {
+        Mockito.when(guessNumberGameService.getGamePointsBy("1")).thenReturn(3);
+        mockMvc.perform(MockMvcRequestBuilders.get("/games/game-points")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\": \"1\"}"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.points").value(3));
+    }
+
 }
