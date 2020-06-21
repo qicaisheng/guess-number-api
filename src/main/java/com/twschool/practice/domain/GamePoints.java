@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class GamePoints {
     private List<GameRecord> gameRecords;
@@ -14,9 +13,15 @@ public class GamePoints {
     }
 
     public int totalPoints() {
-        List<Integer> continuousFiveTimesSucceedCount = getContinuousSucceedCount().stream().filter(count -> count >= 5).collect(Collectors.toList());
-        List<Integer> continuousThreeTimesSucceedCount = getContinuousSucceedCount().stream().filter(count -> count >= 3).collect(Collectors.toList());
-        return continuousThreeTimesSucceedCount.size() * 3 + continuousFiveTimesSucceedCount.size() * 2;
+        int continuousMultipleFiveTimesSucceedCount = getContinuousSucceedCount().stream()
+                .map(count -> count / 5)
+                .mapToInt(Integer::intValue)
+                .sum();
+        int continuousMultipleThreeTimesSucceedCount = getContinuousSucceedCount().stream()
+                .map(count -> count / 3)
+                .mapToInt(Integer::intValue)
+                .sum();
+        return continuousMultipleThreeTimesSucceedCount * 3 + continuousMultipleFiveTimesSucceedCount * 2;
     }
 
     private List<Integer> getContinuousSucceedCount() {
