@@ -1,7 +1,7 @@
 package com.twschool.practice.service;
 
 import com.twschool.practice.domain.GameNotExistedException;
-import com.twschool.practice.domain.GameRecord;
+import com.twschool.practice.domain.GameFinalRecord;
 import com.twschool.practice.domain.GameStatus;
 import com.twschool.practice.domain.GuessNumberGame;
 import com.twschool.practice.repository.GameFinalRecordRepository;
@@ -92,10 +92,10 @@ public class GuessNumberGameServiceTest {
     @Test
     public void should_get_game_points() {
         GuessNumberGameRepository guessNumberGameRepository = Mockito.mock(GuessNumberGameRepository.class);
-        List<GameRecord> gameRecords = Arrays.asList(new GameRecord("userId1", GameStatus.SUCCEED),
-                new GameRecord("userId1", GameStatus.SUCCEED),
-                new GameRecord("userId1", GameStatus.SUCCEED));
-        Mockito.when(gameFinalRecordRepository.findBy("userId1")).thenReturn(gameRecords);
+        List<GameFinalRecord> gameFinalRecords = Arrays.asList(new GameFinalRecord("userId1", GameStatus.SUCCEED),
+                new GameFinalRecord("userId1", GameStatus.SUCCEED),
+                new GameFinalRecord("userId1", GameStatus.SUCCEED));
+        Mockito.when(gameFinalRecordRepository.findBy("userId1")).thenReturn(gameFinalRecords);
         GuessNumberGameService guessNumberGameService = new GuessNumberGameService(guessNumberGameRepository, gameFinalRecordRepository);
         
         int points = guessNumberGameService.getGamePointsBy("userId1");

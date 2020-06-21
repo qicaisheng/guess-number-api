@@ -1,6 +1,6 @@
 package com.twschool.practice.repository;
 
-import com.twschool.practice.domain.GameRecord;
+import com.twschool.practice.domain.GameFinalRecord;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 
 @Repository
 public class MemoryGameFinalRecordRepository implements GameFinalRecordRepository {
-    private final List<GameRecord> gameRecords = new ArrayList<>();
+    private final List<GameFinalRecord> gameFinalRecords = new ArrayList<>();
 
     @Override
-    public void create(GameRecord gameRecord) {
-        gameRecords.add(gameRecord);
+    public void create(GameFinalRecord gameFinalRecord) {
+        gameFinalRecords.add(gameFinalRecord);
     }
 
     @Override
-    public List<GameRecord> findBy(String userId) {
-        return gameRecords.stream()
+    public List<GameFinalRecord> findBy(String userId) {
+        return gameFinalRecords.stream()
                 .filter(gameRecord -> gameRecord.getUserId().equals(userId))
                 .collect(Collectors.toList());
     }

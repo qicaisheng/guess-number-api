@@ -26,7 +26,7 @@ public class GuessNumberGameService {
         }
         String guess = guessNumberGame.guess(userAnswer);
         if (guessNumberGame.getStatus() != GameStatus.CONTINUED) {
-            gameFinalRecordRepository.create(new GameRecord(userId, guessNumberGame.getStatus()));
+            gameFinalRecordRepository.create(new GameFinalRecord(userId, guessNumberGame.getStatus()));
             guessNumberGameRepository.deleteBy(userId);
         }
         return guess;
@@ -37,8 +37,8 @@ public class GuessNumberGameService {
     }
 
     public int getGamePointsBy(String userId) {
-        List<GameRecord> gameRecords = gameFinalRecordRepository.findBy(userId);
-        GamePoints gamePoints = new GamePoints(gameRecords);
+        List<GameFinalRecord> gameFinalRecords = gameFinalRecordRepository.findBy(userId);
+        GamePoints gamePoints = new GamePoints(gameFinalRecords);
         return gamePoints.totalPoints();
     }
 }

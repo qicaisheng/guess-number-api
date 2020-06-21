@@ -1,6 +1,6 @@
 package com.twschool.practice.repository;
 
-import com.twschool.practice.domain.GameRecord;
+import com.twschool.practice.domain.GameFinalRecord;
 import com.twschool.practice.domain.GameStatus;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,29 +12,29 @@ public class MemoryGameFinalRecordRepositoryTest {
     @Test
     public void should_create_record() {
         MemoryGameFinalRecordRepository memoryGameFinalRecordRepository = new MemoryGameFinalRecordRepository();
-        GameRecord expectedGameRecord = new GameRecord("userId1", GameStatus.SUCCEED);
+        GameFinalRecord expectedGameFinalRecord = new GameFinalRecord("userId1", GameStatus.SUCCEED);
 
-        memoryGameFinalRecordRepository.create(expectedGameRecord);
+        memoryGameFinalRecordRepository.create(expectedGameFinalRecord);
 
-        List<GameRecord> gameRecords = memoryGameFinalRecordRepository.findBy("userId1");
+        List<GameFinalRecord> gameFinalRecords = memoryGameFinalRecordRepository.findBy("userId1");
 
-        Assert.assertEquals(1, gameRecords.size());
-        Assert.assertEquals(expectedGameRecord, gameRecords.get(0));
+        Assert.assertEquals(1, gameFinalRecords.size());
+        Assert.assertEquals(expectedGameFinalRecord, gameFinalRecords.get(0));
     }
 
     @Test
     public void should_find_records_by_id() {
         MemoryGameFinalRecordRepository memoryGameFinalRecordRepository = new MemoryGameFinalRecordRepository();
-        GameRecord expectedGameRecord = new GameRecord("userId1", GameStatus.SUCCEED);
+        GameFinalRecord expectedGameFinalRecord = new GameFinalRecord("userId1", GameStatus.SUCCEED);
 
-        memoryGameFinalRecordRepository.create(new GameRecord("userId1", GameStatus.SUCCEED));
-        memoryGameFinalRecordRepository.create(new GameRecord("userId1", GameStatus.FAILED));
-        memoryGameFinalRecordRepository.create(new GameRecord("userId2", GameStatus.SUCCEED));
+        memoryGameFinalRecordRepository.create(new GameFinalRecord("userId1", GameStatus.SUCCEED));
+        memoryGameFinalRecordRepository.create(new GameFinalRecord("userId1", GameStatus.FAILED));
+        memoryGameFinalRecordRepository.create(new GameFinalRecord("userId2", GameStatus.SUCCEED));
 
-        List<GameRecord> gameRecords = memoryGameFinalRecordRepository.findBy("userId1");
+        List<GameFinalRecord> gameFinalRecords = memoryGameFinalRecordRepository.findBy("userId1");
 
-        Assert.assertEquals(2, gameRecords.size());
-        Assert.assertEquals(GameStatus.SUCCEED, gameRecords.get(0).getGameStatus());
-        Assert.assertEquals(GameStatus.FAILED, gameRecords.get(1).getGameStatus());
+        Assert.assertEquals(2, gameFinalRecords.size());
+        Assert.assertEquals(GameStatus.SUCCEED, gameFinalRecords.get(0).getGameStatus());
+        Assert.assertEquals(GameStatus.FAILED, gameFinalRecords.get(1).getGameStatus());
     }
 }

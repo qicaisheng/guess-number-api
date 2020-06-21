@@ -1,11 +1,11 @@
 package com.twschool.practice.repository;
 
-import com.twschool.practice.domain.GameRecord;
+import com.twschool.practice.domain.GameFinalRecord;
 
 import java.util.List;
 
 public interface GameFinalRecordRepository {
-    void create(GameRecord gameRecord);
+    void create(GameFinalRecord gameFinalRecord);
 
-    List<GameRecord> findBy(String userId);
+    List<GameFinalRecord> findBy(String userId);
 }

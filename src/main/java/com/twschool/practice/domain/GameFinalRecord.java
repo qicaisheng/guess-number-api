@@ -1,10 +1,10 @@
 package com.twschool.practice.domain;
 
-public class GameRecord {
+public class GameFinalRecord {
     private String userId;
     private GameStatus gameStatus;
 
-    public GameRecord(String userId, GameStatus gameStatus) {
+    public GameFinalRecord(String userId, GameStatus gameStatus) {
 
         this.userId = userId;
         this.gameStatus = gameStatus;
