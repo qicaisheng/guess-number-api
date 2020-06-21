@@ -13,18 +13,18 @@ public class GamePoints {
     }
 
     public int totalPoints() {
-        int continuousMultipleFiveTimesSucceedCount = getContinuousSucceedCount().stream()
+        int continuousMultipleFiveTimesSucceedCount = getContinuousSucceedCountList().stream()
                 .map(count -> count / 5)
                 .mapToInt(Integer::intValue)
                 .sum();
-        int continuousMultipleThreeTimesSucceedCount = getContinuousSucceedCount().stream()
+        int continuousMultipleThreeTimesSucceedCount = getContinuousSucceedCountList().stream()
                 .map(count -> count / 3)
                 .mapToInt(Integer::intValue)
                 .sum();
         return continuousMultipleThreeTimesSucceedCount * 3 + continuousMultipleFiveTimesSucceedCount * 2;
     }
 
-    private List<Integer> getContinuousSucceedCount() {
+    private List<Integer> getContinuousSucceedCountList() {
         Map<Integer, Integer> continuousSucceedCountMap = new HashMap<>();
         boolean firstRecordSucceed = gameRecords.get(0).getGameStatus() == GameStatus.SUCCEED;
         continuousSucceedCountMap.put(1, firstRecordSucceed ? 1 : 0);
