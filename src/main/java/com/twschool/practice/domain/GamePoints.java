@@ -1,9 +1,7 @@
 package com.twschool.practice.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GamePoints {
     private List<GameRecord> gameRecords;
@@ -25,20 +23,20 @@ public class GamePoints {
     }
 
     private List<Integer> getContinuousSucceedCountList() {
-        Map<Integer, Integer> continuousSucceedCountMap = new HashMap<>();
+        List<Integer> continuousSucceedCountList = new ArrayList<>();
         boolean firstRecordSucceed = gameRecords.get(0).getGameStatus() == GameStatus.SUCCEED;
-        continuousSucceedCountMap.put(1, firstRecordSucceed ? 1 : 0);
+        continuousSucceedCountList.add(firstRecordSucceed ? 1 : 0);
 
         for (int index = 1; index < gameRecords.size(); index++) {
             if (gameRecords.get(index -1).getGameStatus() != GameStatus.SUCCEED) {
-                continuousSucceedCountMap.put(continuousSucceedCountMap.size() + 1, 0);
+                continuousSucceedCountList.add(0);
             }
             if (gameRecords.get(index).getGameStatus() == GameStatus.SUCCEED) {
-                int lastSucceedCount = continuousSucceedCountMap.get(continuousSucceedCountMap.size());
-                continuousSucceedCountMap.put(continuousSucceedCountMap.size(), lastSucceedCount + 1);
+                int lastSucceedCount = continuousSucceedCountList.get(continuousSucceedCountList.size() - 1);
+                continuousSucceedCountList.set(continuousSucceedCountList.size() - 1, lastSucceedCount + 1);
             }
         }
-        return new ArrayList<>(continuousSucceedCountMap.values());
+        return continuousSucceedCountList;
     }
 
 }
