@@ -14,8 +14,9 @@ public class GamePoints {
     }
 
     public int totalPoints() {
-        List<Integer> list = getContinuousSucceedCount().stream().filter(count -> count > 3).collect(Collectors.toList());
-        return list.size() * 3;
+        List<Integer> continuousFiveTimesSucceedCount = getContinuousSucceedCount().stream().filter(count -> count >= 5).collect(Collectors.toList());
+        List<Integer> continuousThreeTimesSucceedCount = getContinuousSucceedCount().stream().filter(count -> count >= 3).collect(Collectors.toList());
+        return continuousThreeTimesSucceedCount.size() * 3 + continuousFiveTimesSucceedCount.size() * 2;
     }
 
     private List<Integer> getContinuousSucceedCount() {
@@ -25,10 +26,11 @@ public class GamePoints {
 
         for (int index = 1; index < gameRecords.size(); index++) {
             if (gameRecords.get(index -1).getGameStatus() != GameStatus.SUCCEED) {
-                continuousSucceedCountMap.put(continuousSucceedCountMap.size(), 0);
+                continuousSucceedCountMap.put(continuousSucceedCountMap.size() + 1, 0);
             }
             if (gameRecords.get(index).getGameStatus() == GameStatus.SUCCEED) {
-                continuousSucceedCountMap.put(index, continuousSucceedCountMap.get(index) + 1);
+                int lastSucceedCount = continuousSucceedCountMap.get(continuousSucceedCountMap.size());
+                continuousSucceedCountMap.put(continuousSucceedCountMap.size(), lastSucceedCount + 1);
             }
         }
         return new ArrayList<>(continuousSucceedCountMap.values());

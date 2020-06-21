@@ -29,4 +29,17 @@ public class GamePointsTest {
         Assert.assertEquals(0, gamePoints.totalPoints());
     }
 
+    @Test
+    public void should_calculate_game_points_5_given_user_game_final_records_5_continuous_succeed() {
+        List<GameRecord> gameRecords = Arrays.asList(new GameRecord("1", GameStatus.SUCCEED),
+                new GameRecord("1", GameStatus.SUCCEED),
+                new GameRecord("1", GameStatus.SUCCEED),
+                new GameRecord("1", GameStatus.SUCCEED),
+                new GameRecord("1", GameStatus.SUCCEED));
+        GamePoints gamePoints = new GamePoints(gameRecords);
+
+        Assert.assertEquals(5, gamePoints.totalPoints());
+    }
+
+
 }
