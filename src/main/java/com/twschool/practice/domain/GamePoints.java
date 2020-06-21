@@ -25,7 +25,7 @@ public class GamePoints {
         continuousSucceedCountList.add(firstRecordSucceed ? 1 : 0);
 
         for (int index = 1; index < gameRecords.size(); index++) {
-            if (gameRecords.get(index -1).getGameStatus() != GameStatus.SUCCEED) {
+            if (gameRecords.get(index).getGameStatus() == GameStatus.FAILED) {
                 continuousSucceedCountList.add(0);
             }
             if (gameRecords.get(index).getGameStatus() == GameStatus.SUCCEED) {
