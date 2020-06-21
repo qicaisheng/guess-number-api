@@ -16,6 +16,9 @@ public class GuessNumberGameService {
 
     public String guess(String userAnswer, String userId) {
         GuessNumberGame guessNumberGame = guessNumberGameRepository.findBy(userId);
+        if (guessNumberGame == null) {
+            throw new GameNotExistedException();
+        }
         String guess = guessNumberGame.guess(userAnswer);
         if (guessNumberGame.getStatus() != GameStatus.CONTINUED) {
             guessNumberGameRepository.deleteBy(userId);

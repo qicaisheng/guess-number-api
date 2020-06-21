@@ -48,4 +48,14 @@ public class GuessNumberGameServiceTest {
         Mockito.verify(memoryGuessNumberGameRepository, Mockito.times(1)).deleteBy(Mockito.eq("1"));
     }
 
+    @Test(expected = GameNotExistedException.class)
+    public void should_throw_exception_when_game_not_existed() {
+        MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
+        Mockito.when(memoryGuessNumberGameRepository.findBy(Mockito.any())).thenReturn(null);
+
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository);
+
+        guessNumberGameService.guess("1 2 3 4", "1");
+    }
+
 }
