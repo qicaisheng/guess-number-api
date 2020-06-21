@@ -1,5 +1,7 @@
 package com.twschool.practice.service;
 
+import com.twschool.practice.domain.GameStatus;
+import com.twschool.practice.domain.GuessNumberGame;
 import com.twschool.practice.repository.GuessNumberGameRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,12 @@ public class GuessNumberGameService {
     }
 
     public String guess(String userAnswer, String userId) {
-        return guessNumberGameRepository.findBy(userId).guess(userAnswer);
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.findBy(userId);
+        String guess = guessNumberGame.guess(userAnswer);
+        if (guessNumberGame.getStatus() != GameStatus.CONTINUED) {
+            guessNumberGameRepository.deleteBy(userId);
+        }
+        return guess;
     }
 
     public void start(String userId) {
