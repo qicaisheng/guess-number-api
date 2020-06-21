@@ -1,5 +1,6 @@
 package com.twschool.practice.service;
 
+import com.twschool.practice.domain.GamePoints;
 import com.twschool.practice.domain.GameRecord;
 import com.twschool.practice.domain.GameStatus;
 import com.twschool.practice.domain.GuessNumberGame;
@@ -7,6 +8,8 @@ import com.twschool.practice.repository.GuessNumberGameRepository;
 import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
 import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GuessNumberGameService {
@@ -35,5 +38,11 @@ public class GuessNumberGameService {
 
     public void start(String userId) {
         guessNumberGameRepository.createBy(userId);
+    }
+
+    public int getGamePointsBy(String userId) {
+        List<GameRecord> gameRecords = gameFinalRecordRepository.findBy(userId);
+        GamePoints gamePoints = new GamePoints(gameRecords);
+        return gamePoints.totalPoints();
     }
 }

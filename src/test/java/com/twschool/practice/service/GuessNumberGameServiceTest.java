@@ -1,12 +1,17 @@
 package com.twschool.practice.service;
 
+import com.twschool.practice.domain.GameRecord;
 import com.twschool.practice.domain.GameStatus;
 import com.twschool.practice.domain.GuessNumberGame;
 import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
 import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class GuessNumberGameServiceTest {
 
@@ -82,4 +87,17 @@ public class GuessNumberGameServiceTest {
         guessNumberGameService.guess("1 2 3 4", "1");
     }
 
+    @Test
+    public void should_get_game_points() {
+        MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
+        List<GameRecord> gameRecords = Arrays.asList(new GameRecord("userId1", GameStatus.SUCCEED),
+                new GameRecord("userId1", GameStatus.SUCCEED),
+                new GameRecord("userId1", GameStatus.SUCCEED));
+        Mockito.when(memoryGameFinalRecordRepository.findBy("userId1")).thenReturn(gameRecords);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+        
+        int points = guessNumberGameService.getGamePointsBy("userId1");
+
+        Assert.assertEquals(3, points);
+    }
 }
