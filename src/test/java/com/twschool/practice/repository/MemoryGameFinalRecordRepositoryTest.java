@@ -5,7 +5,7 @@ import com.twschool.practice.domain.GameStatus;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MemoryGuessNumberGameRecordRepositoryTest {
+public class MemoryGameFinalRecordRepositoryTest {
 
     @Test
     public void should_create_record() {
