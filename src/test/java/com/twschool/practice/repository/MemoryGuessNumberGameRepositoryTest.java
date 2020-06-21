@@ -10,7 +10,7 @@ public class MemoryGuessNumberGameRepositoryTest {
     public void should_create_guess_number_game() {
         MemoryGuessNumberGameRepository guessNumberGameRepository = new MemoryGuessNumberGameRepository();
         
-        GuessNumberGame guessNumberGame = guessNumberGameRepository.create("1");
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.createBy("1");
 
         Assert.assertNotNull(guessNumberGame);
     }
@@ -18,9 +18,9 @@ public class MemoryGuessNumberGameRepositoryTest {
     @Test
     public void should_get_guess_number_game() {
         MemoryGuessNumberGameRepository guessNumberGameRepository = new MemoryGuessNumberGameRepository();
-        guessNumberGameRepository.create("1");
+        guessNumberGameRepository.createBy("1");
         
-        GuessNumberGame guessNumberGame = guessNumberGameRepository.find("1");
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.findBy("1");
 
         Assert.assertNotNull(guessNumberGame);
     }
@@ -28,10 +28,10 @@ public class MemoryGuessNumberGameRepositoryTest {
     @Test
     public void should_get_guess_number_game_by_user_id() {
         MemoryGuessNumberGameRepository guessNumberGameRepository = new MemoryGuessNumberGameRepository();
-        GuessNumberGame guessNumberGame1 = guessNumberGameRepository.create("1");
-        guessNumberGameRepository.create("2");
+        GuessNumberGame guessNumberGame1 = guessNumberGameRepository.createBy("1");
+        guessNumberGameRepository.createBy("2");
 
-        GuessNumberGame guessNumberGame = guessNumberGameRepository.find("1");
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.findBy("1");
 
         Assert.assertNotNull(guessNumberGame);
         Assert.assertEquals(guessNumberGame1, guessNumberGame);

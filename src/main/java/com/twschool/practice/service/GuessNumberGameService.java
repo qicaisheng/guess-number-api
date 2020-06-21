@@ -13,10 +13,10 @@ public class GuessNumberGameService {
     }
 
     public String guess(String userAnswer, String userId) {
-        return guessNumberGameRepository.find(userId).guess(userAnswer);
+        return guessNumberGameRepository.findBy(userId).guess(userAnswer);
     }
 
     public void start(String userId) {
-        guessNumberGameRepository.create(userId);
+        guessNumberGameRepository.createBy(userId);
     }
 }
