@@ -1,17 +1,23 @@
 package com.twschool.practice.service;
 
+import com.twschool.practice.domain.GameRecord;
 import com.twschool.practice.domain.GameStatus;
 import com.twschool.practice.domain.GuessNumberGame;
 import com.twschool.practice.repository.GuessNumberGameRepository;
+import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
+import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GuessNumberGameService {
     
     private GuessNumberGameRepository guessNumberGameRepository;
+    private MemoryGameFinalRecordRepository gameFinalRecordRepository;
 
-    public GuessNumberGameService(GuessNumberGameRepository guessNumberGameRepository) {
-        this.guessNumberGameRepository = guessNumberGameRepository;
+    public GuessNumberGameService(MemoryGuessNumberGameRepository memoryGuessNumberGameRepository, MemoryGameFinalRecordRepository memoryGameFinalRecordRepository) {
+
+        guessNumberGameRepository = memoryGuessNumberGameRepository;
+        this.gameFinalRecordRepository = memoryGameFinalRecordRepository;
     }
 
     public String guess(String userAnswer, String userId) {
@@ -21,6 +27,7 @@ public class GuessNumberGameService {
         }
         String guess = guessNumberGame.guess(userAnswer);
         if (guessNumberGame.getStatus() != GameStatus.CONTINUED) {
+            gameFinalRecordRepository.create(new GameRecord(userId, guessNumberGame.getStatus()));
             guessNumberGameRepository.deleteBy(userId);
         }
         return guess;
