@@ -34,7 +34,7 @@ public class GuessNumberGameControllerTest {
 
     @Test
     public void should_return_guess_result() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/game/guess")
+        mockMvc.perform(MockMvcRequestBuilders.get("/games/guess")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"userId\": \"1\"}")
             .param("number", "1 2 3 4"))
@@ -45,7 +45,7 @@ public class GuessNumberGameControllerTest {
 
     @Test
     public void should_start_game() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/game")
+        mockMvc.perform(MockMvcRequestBuilders.post("/games")
                 .content("{\"userId\": \"1\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -56,7 +56,7 @@ public class GuessNumberGameControllerTest {
     @Test
     public void should_return_http_status_code_400_when_guess_but_not_start_game() throws Exception {
         Mockito.doThrow(GameNotExistedException.class).when(guessNumberGameService).guess(Mockito.any(), Mockito.any());
-        mockMvc.perform(MockMvcRequestBuilders.get("/game/guess")
+        mockMvc.perform(MockMvcRequestBuilders.get("/games/guess")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"userId\": \"1\"}")
                 .param("number", "1 2 3 4"))

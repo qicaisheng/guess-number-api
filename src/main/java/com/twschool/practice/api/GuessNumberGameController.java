@@ -13,7 +13,7 @@ public class GuessNumberGameController {
     @Autowired
     private GuessNumberGameService guessNumberGameService;
     
-    @GetMapping("/game/guess")
+    @GetMapping("/games/guess")
     public Map<String, String> guess(@RequestParam String number, @RequestBody UserRequestBody userRequestBody) {
         
         String result = guessNumberGameService.guess(number, userRequestBody.getUserId());
@@ -24,7 +24,7 @@ public class GuessNumberGameController {
         return response;
     }
 
-    @PostMapping("/game")
+    @PostMapping("/games")
     public void start(@RequestBody UserRequestBody userRequestBody) {
         guessNumberGameService.start(userRequestBody.getUserId());
     }
