@@ -11,9 +11,9 @@ public class GamePoints {
     }
 
     public int totalPoints() {
-        int continuousMultipleFiveTimesSucceedCount = getSumOf(5);
-        int continuousMultipleThreeTimesSucceedCount = getSumOf(3);
-        return continuousMultipleThreeTimesSucceedCount * 3 + continuousMultipleFiveTimesSucceedCount * 2;
+        int continuousFiveTimesSucceedCount = getSumOf(5);
+        int continuousThreeTimesSucceedCount = getSumOf(3);
+        return continuousThreeTimesSucceedCount * 3 + continuousFiveTimesSucceedCount * 2;
     }
 
     private List<Integer> getContinuousSucceedCountList() {
