@@ -23,4 +23,9 @@ public class MemoryGuessNumberGameRepository implements GuessNumberGameRepositor
     public GuessNumberGame findBy(String userId) {
         return guessNumberGameMap.get(userId);
     }
+
+    @Override
+    public void deleteBy(String userId) {
+        guessNumberGameMap.remove(userId);
+    }
 }

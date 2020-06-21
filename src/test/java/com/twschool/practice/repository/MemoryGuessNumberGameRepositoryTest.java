@@ -36,4 +36,16 @@ public class MemoryGuessNumberGameRepositoryTest {
         Assert.assertNotNull(guessNumberGame);
         Assert.assertEquals(guessNumberGame1, guessNumberGame);
     }
+
+    @Test
+    public void should_delete_guess_number_game_by_user_id() {
+        MemoryGuessNumberGameRepository guessNumberGameRepository = new MemoryGuessNumberGameRepository();
+        guessNumberGameRepository.createBy("1");
+
+        guessNumberGameRepository.deleteBy("1");
+
+        GuessNumberGame guessNumberGame = guessNumberGameRepository.findBy("1");
+
+        Assert.assertNull(guessNumberGame);
+    }
 }
