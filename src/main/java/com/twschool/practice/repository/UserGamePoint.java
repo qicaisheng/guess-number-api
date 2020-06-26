@@ -1,8 +1,10 @@
 package com.twschool.practice.repository;
 
+import com.twschool.practice.domain.GameStatus;
+
 public class UserGamePoint {
     private final String userId;
-    private final int point;
+    private int point;
     private final int continuousSucceedTimes;
 
     public UserGamePoint(String userId, int point, int continuousSucceedTimes) {
@@ -21,5 +23,11 @@ public class UserGamePoint {
 
     public int getContinuousSucceedTimes() {
         return continuousSucceedTimes;
+    }
+
+    public void receive(GameStatus gameStatus) {
+        if (gameStatus == GameStatus.SUCCEED) {
+            point = point + 3;
+        }
     }
 }
