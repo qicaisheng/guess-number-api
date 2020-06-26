@@ -28,6 +28,7 @@ public class UserGamePoint {
     public void receive(GameStatus gameStatus) {
         if (gameStatus == GameStatus.SUCCEED) {
             point = point + 3;
+            continuousSucceedTimes ++;
         }
         if (gameStatus == GameStatus.FAILED) {
             point = point - 3;
