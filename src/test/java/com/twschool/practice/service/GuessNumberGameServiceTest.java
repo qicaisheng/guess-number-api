@@ -1,26 +1,24 @@
 package com.twschool.practice.service;
 
 import com.twschool.practice.domain.GameNotExistedException;
-import com.twschool.practice.domain.GameRecord;
 import com.twschool.practice.domain.GameStatus;
 import com.twschool.practice.domain.GuessNumberGame;
-import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
 import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
+import com.twschool.practice.repository.UserGamePoint;
+import com.twschool.practice.repository.UserGamePointRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class GuessNumberGameServiceTest {
 
-    private MemoryGameFinalRecordRepository memoryGameFinalRecordRepository;
+    private UserGamePointRepository userGamePointRepository;
 
     @Before
     public void setUp() throws Exception {
-        memoryGameFinalRecordRepository = Mockito.mock(MemoryGameFinalRecordRepository.class);
+        userGamePointRepository = Mockito.mock(UserGamePointRepository.class);
+        Mockito.when(userGamePointRepository.findLatestBy(Mockito.any())).thenReturn(new UserGamePoint("1", 14, 3));
     }
 
     @Test
@@ -29,7 +27,7 @@ public class GuessNumberGameServiceTest {
         GuessNumberGame guessNumberGame = Mockito.mock(GuessNumberGame.class);
         Mockito.when(memoryGuessNumberGameRepository.findBy(Mockito.any())).thenReturn(guessNumberGame);
         
-        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, userGamePointRepository);
 
         guessNumberGameService.guess("1 2 3 4", "1");
 
@@ -41,7 +39,7 @@ public class GuessNumberGameServiceTest {
     @Test
     public void should_create_game() {
         MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
-        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, userGamePointRepository);
 
         guessNumberGameService.start("1");
 
@@ -56,7 +54,7 @@ public class GuessNumberGameServiceTest {
         Mockito.when(guessNumberGame.getStatus()).thenReturn(GameStatus.FAILED);
         Mockito.when(memoryGuessNumberGameRepository.findBy(Mockito.any())).thenReturn(guessNumberGame);
 
-        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, userGamePointRepository);
 
         guessNumberGameService.guess("1 2 3 4", "1");
         
@@ -64,18 +62,18 @@ public class GuessNumberGameServiceTest {
     }
 
     @Test
-    public void should_record_final_record_when_game_failed() {
+    public void should_create_new_user_game_point_when_game_failed() {
         MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
         GuessNumberGame guessNumberGame = Mockito.mock(GuessNumberGame.class);
         Mockito.when(guessNumberGame.guess(Mockito.any())).thenReturn("1A2B");
         Mockito.when(guessNumberGame.getStatus()).thenReturn(GameStatus.FAILED);
         Mockito.when(memoryGuessNumberGameRepository.findBy(Mockito.any())).thenReturn(guessNumberGame);
-        
-        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+ 
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, userGamePointRepository);
 
         guessNumberGameService.guess("1 2 3 4", "1");
 
-        Mockito.verify(memoryGameFinalRecordRepository, Mockito.times(1)).create(Mockito.any());
+        Mockito.verify(userGamePointRepository, Mockito.times(1)).create(Mockito.any());
     }
 
     @Test(expected = GameNotExistedException.class)
@@ -83,7 +81,7 @@ public class GuessNumberGameServiceTest {
         MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
         Mockito.when(memoryGuessNumberGameRepository.findBy(Mockito.any())).thenReturn(null);
 
-        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, userGamePointRepository);
 
         guessNumberGameService.guess("1 2 3 4", "1");
     }
@@ -91,14 +89,12 @@ public class GuessNumberGameServiceTest {
     @Test
     public void should_get_game_points() {
         MemoryGuessNumberGameRepository memoryGuessNumberGameRepository = Mockito.mock(MemoryGuessNumberGameRepository.class);
-        List<GameRecord> gameRecords = Arrays.asList(new GameRecord("userId1", GameStatus.SUCCEED),
-                new GameRecord("userId1", GameStatus.SUCCEED),
-                new GameRecord("userId1", GameStatus.SUCCEED));
-        Mockito.when(memoryGameFinalRecordRepository.findBy("userId1")).thenReturn(gameRecords);
-        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, memoryGameFinalRecordRepository);
+        UserGamePoint userGamePoint = new UserGamePoint("userId1", 15, 3);
+        Mockito.when(userGamePointRepository.findLatestBy("userId1")).thenReturn(userGamePoint);
+        GuessNumberGameService guessNumberGameService = new GuessNumberGameService(memoryGuessNumberGameRepository, userGamePointRepository);
         
         int points = guessNumberGameService.getGamePointsBy("userId1");
 
-        Assert.assertEquals(3, points);
+        Assert.assertEquals(15, points);
     }
 }

@@ -27,18 +27,26 @@ public class UserGamePoint {
 
     public void receive(GameStatus gameStatus) {
         if (gameStatus == GameStatus.SUCCEED) {
-            point = point + 3;
-            continuousSucceedTimes ++;
-            if (continuousSucceedTimes % 3 == 0) {
-                point = point + 2;
-            }
-            if (continuousSucceedTimes % 5 == 0) {
-                point = point + 3;
-            }
+            addPoint();
         }
         if (gameStatus == GameStatus.FAILED) {
-            point = point - 3;
-            continuousSucceedTimes = 0;
+            deductPoint();
+        }
+    }
+
+    private void deductPoint() {
+        point = point - 3;
+        continuousSucceedTimes = 0;
+    }
+
+    private void addPoint() {
+        point = point + 3;
+        continuousSucceedTimes ++;
+        if (continuousSucceedTimes % 3 == 0) {
+            point = point + 2;
+        }
+        if (continuousSucceedTimes % 5 == 0) {
+            point = point + 3;
         }
     }
 }

@@ -1,23 +1,24 @@
 package com.twschool.practice.service;
 
-import com.twschool.practice.domain.*;
+import com.twschool.practice.domain.GameNotExistedException;
+import com.twschool.practice.domain.GameStatus;
+import com.twschool.practice.domain.GuessNumberGame;
 import com.twschool.practice.repository.GuessNumberGameRepository;
-import com.twschool.practice.repository.MemoryGameFinalRecordRepository;
 import com.twschool.practice.repository.MemoryGuessNumberGameRepository;
+import com.twschool.practice.repository.UserGamePoint;
+import com.twschool.practice.repository.UserGamePointRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class GuessNumberGameService {
     
     private GuessNumberGameRepository guessNumberGameRepository;
-    private MemoryGameFinalRecordRepository gameFinalRecordRepository;
+    private UserGamePointRepository userGamePointRepository;
 
-    public GuessNumberGameService(MemoryGuessNumberGameRepository memoryGuessNumberGameRepository, MemoryGameFinalRecordRepository memoryGameFinalRecordRepository) {
+    public GuessNumberGameService(MemoryGuessNumberGameRepository memoryGuessNumberGameRepository, UserGamePointRepository userGamePointRepository) {
 
         guessNumberGameRepository = memoryGuessNumberGameRepository;
-        this.gameFinalRecordRepository = memoryGameFinalRecordRepository;
+        this.userGamePointRepository = userGamePointRepository;
     }
 
     public String guess(String userAnswer, String userId) {
@@ -27,7 +28,7 @@ public class GuessNumberGameService {
         }
         String guess = guessNumberGame.guess(userAnswer);
         if (guessNumberGame.getStatus() != GameStatus.CONTINUED) {
-            gameFinalRecordRepository.create(new GameRecord(userId, guessNumberGame.getStatus()));
+            calculatePoint(userId, guessNumberGame.getStatus());
             guessNumberGameRepository.deleteBy(userId);
         }
         return guess;
@@ -38,8 +39,13 @@ public class GuessNumberGameService {
     }
 
     public int getGamePointsBy(String userId) {
-        List<GameRecord> gameRecords = gameFinalRecordRepository.findBy(userId);
-        GamePoints gamePoints = new GamePoints(gameRecords);
-        return gamePoints.totalPoints();
+        UserGamePoint userGamePoint = userGamePointRepository.findLatestBy(userId);
+        return userGamePoint.getPoint();
+    }
+
+    private void calculatePoint(String userId, GameStatus status) {
+        UserGamePoint userGamePoint = userGamePointRepository.findLatestBy(userId);
+        userGamePoint.receive(status);
+        userGamePointRepository.create(userGamePoint);
     }
 }
