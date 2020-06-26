@@ -5,7 +5,7 @@ import com.twschool.practice.domain.GameStatus;
 public class UserGamePoint {
     private final String userId;
     private int point;
-    private final int continuousSucceedTimes;
+    private int continuousSucceedTimes;
 
     public UserGamePoint(String userId, int point, int continuousSucceedTimes) {
         this.userId = userId;
@@ -31,6 +31,7 @@ public class UserGamePoint {
         }
         if (gameStatus == GameStatus.FAILED) {
             point = point - 3;
+            continuousSucceedTimes = 0;
         }
     }
 }
