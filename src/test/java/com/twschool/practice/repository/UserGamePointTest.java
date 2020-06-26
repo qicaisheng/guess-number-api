@@ -44,4 +44,13 @@ public class UserGamePointTest {
         Assert.assertEquals(1 + 1, userGamePoint.getContinuousSucceedTimes());
     }
 
+    @Test
+    public void should_add_five_point_when_receive_new_game_succeed_status_given_2_continuous_succeed_times() {
+        UserGamePoint userGamePoint = new UserGamePoint("userId1", 6, 2);
+
+        userGamePoint.receive(GameStatus.SUCCEED);
+
+        Assert.assertEquals(6 + 3 + 2, userGamePoint.getPoint());
+    }
+
 }

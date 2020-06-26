@@ -29,6 +29,9 @@ public class UserGamePoint {
         if (gameStatus == GameStatus.SUCCEED) {
             point = point + 3;
             continuousSucceedTimes ++;
+            if (continuousSucceedTimes == 3) {
+                point = point + 2;
+            }
         }
         if (gameStatus == GameStatus.FAILED) {
             point = point - 3;
