@@ -29,7 +29,7 @@ public class GuessNumberGameService {
         String guess = guessNumberGame.guess(userAnswer);
         if (guessNumberGame.getStatus() != GameStatus.CONTINUED) {
             calculatePoint(userId, guessNumberGame.getStatus());
-            guessNumberGameRepository.deleteBy(userId);
+            exitGame(userId);
         }
         return guess;
     }
@@ -47,5 +47,9 @@ public class GuessNumberGameService {
         UserGamePoint userGamePoint = userGamePointRepository.findLatestBy(userId);
         userGamePoint.receive(status);
         userGamePointRepository.create(userGamePoint);
+    }
+
+    private void exitGame(String userId) {
+        guessNumberGameRepository.deleteBy(userId);
     }
 }
