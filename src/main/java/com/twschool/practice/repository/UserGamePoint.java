@@ -32,7 +32,7 @@ public class UserGamePoint {
             if (continuousSucceedTimes % 3 == 0) {
                 point = point + 2;
             }
-            if (continuousSucceedTimes == 5) {
+            if (continuousSucceedTimes % 5 == 0) {
                 point = point + 3;
             }
         }
