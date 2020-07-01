@@ -32,4 +32,16 @@ public class MemoryUserGamePointRepositoryTest {
         Assert.assertNotNull(userGamePoint);
         Assert.assertEquals(expectedUserGamePoint, userGamePoint);
     }
+
+    @Test
+    public void should_find_point_with_0_when_find_latest_user_game_point_given_empty_point() {
+
+        UserGamePointRepository userGamePointRepository = new MemoryUserGamePointRepository();
+
+        UserGamePoint userGamePoint = userGamePointRepository.findLatestBy("userId1");
+        Assert.assertNotNull(userGamePoint);
+        Assert.assertEquals(0, userGamePoint.getPoint());
+        Assert.assertEquals(0, userGamePoint.getContinuousSucceedTimes());
+    }
+
 }
