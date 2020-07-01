@@ -1,10 +1,13 @@
 package com.twschool.practice.repository;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class MemoryUserGamePointRepository implements UserGamePointRepository {
     private final List<UserGamePoint> userGamePoints = new ArrayList<>();
     
